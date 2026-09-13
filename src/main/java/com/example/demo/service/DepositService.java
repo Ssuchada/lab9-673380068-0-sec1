@@ -26,6 +26,10 @@ public class DepositService {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new RuntimeException("Account not found" + accountId));
 
+        if (amount == null || amount <= 0) {
+        throw new RuntimeException("Invalid deposit amount");
+}
+
         //เพิ่มจำนวนเงินเข้า balance แล้วบันทึก Account
         account.setBalance(account.getBalance() + amount);
         accountRepository.save(account);
